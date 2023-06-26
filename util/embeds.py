@@ -1,4 +1,3 @@
-import random
 import disnake
 
 SUCCESS = 0x10D21B

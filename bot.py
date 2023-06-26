@@ -1,7 +1,5 @@
-import os
-import logging
 import disnake
-import asyncio
+import logging
 
 from constants import *
 from util import errors
@@ -18,6 +16,7 @@ if BOT_TOKEN is None:
 
 #Bot Definition
 intents = disnake.Intents.default()
+intents.message_content = True
 intents.members = True
 bot = commands.InteractionBot(intents = intents)
 
@@ -29,8 +28,19 @@ logging.info(f"Successfully Loaded Plugins: {', '.join(bot.cogs)}")
 
 @bot.event
 async def on_message(message):
-    if isinstance(message.channel, disnake.DMChannel) and message.author != bot.user:
-        logging.log(level = 100, msg = f"DM | {message.author}: {message.content}")
+    if message.author == bot.user:
+        return
+    
+    if isinstance(message.channel, disnake.DMChannel):
+        logging.log(level = 100, msg = f"DM - {message.author}: {message.content}")
+    else:
+        logging.log(level = 100, msg = f"{message.channel} - {message.author}: {message.content}")
+
+    if message.content.startswith("hello"):
+        await message.channel.send(f"Hello from the other side of the screen, {message.author}!")
+
+    if message.content.startswith("ily"):
+        await message.channel.send(f"ily too {message.author} <3")
 
 '''
 Check if the account has been connected without using logging

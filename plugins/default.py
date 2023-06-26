@@ -1,5 +1,4 @@
 import time
-import disnake
 import asyncio
 
 from util.embeds import *
@@ -23,19 +22,23 @@ class Default(commands.Cog, description = "Bot's default commands."):
         user = await self.bot.fetch_user(user_id)
 
         if user is None:
-            await inter.response.send_message("User not found.", ephemeral = True)
+            await inter.response.send_message("Can't find user.", ephemeral = True)
         else:
             channel = await self.bot.create_dm(user)
             await channel.send(msg)
-            await inter.response.send_message("Sent message successfully.", ephemeral = True)
+            await inter.response.send_message("Message sent successfully.", ephemeral = True)
 
-    @commands.slash_command(description = "Owner - Send message on the channel.")
+    @commands.slash_command(description = "Owner - Send message on the current channel.")
     @commands.is_owner()
     async def say(self, inter, msg: str):
         await inter.channel.send(msg)
-        await inter.response.send_message("Sent message successfully.", ephemeral = True)
+        await inter.response.send_message("Message sent successfully.", ephemeral = True)
         await asyncio.sleep(1)
         await inter.delete_original_response()
+
+    @commands.slash_command(description = "Everyone - About the creator")
+    async def creator(self, inter):
+        await inter.response.send_message("## Creator: Ducca \n ## Discord: caodoc \n ## Github: [Ducca](https://github.com/caodoc)")
 
     @commands.slash_command(description = "Owner - Servers list.")
     @commands.is_owner()
@@ -43,10 +46,10 @@ class Default(commands.Cog, description = "Bot's default commands."):
         #Replies with info on the bot's guilds
         await inter.response.defer()
 
-        guilds = [f"{guild.name} owned by {guild.owner.name}" for guild in self.bot.guilds]
+        guilds = [f"{guild.name} own by {guild.owner.name}" for guild in self.bot.guilds]
         guilds.sort(key = lambda x: (x[1]))
 
-        content = f"I\'m in {len(guilds)} server!\n{guilds}"
+        content = f"## I\'m in {len(guilds)} server!\n{guilds}"
         await inter.send(content)
 
 def setup(bot):
