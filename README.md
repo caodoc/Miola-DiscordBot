@@ -10,5 +10,4 @@ Change ``BOT_TOKEN`` and ``OWNER_ID`` at ``constants.py`` into your bot's token 
 <br>
 Run ``bot.py`` on terminal by ``py bot.py``, that's all.
 
-![](https://img.shields.io/github/repo-size/caodoc/Miola-DiscordBot?style="flat-square"&color="94a4ff")
 ![](https://img.shields.io/github/last-commit/caodoc/Miola-DiscordBot?style="flat-square"&color="94a4ff")
