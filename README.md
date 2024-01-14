@@ -1,10 +1,8 @@
 # Miola Bot
 
-<hr>
-
 ## Introduction
 A discord bot made with [disnake](https://docs.disnake.dev/en/stable/) python library.
-<br>
+
 Bot template by [@GlowCheese](https://github.com/GlowCheese), modified by me.
 
 ## Usage
